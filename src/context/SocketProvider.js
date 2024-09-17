@@ -11,7 +11,9 @@ export default function SocketProvider({ id, children }) {
   const [socket, setSocket] = useState();
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5000", { query: { id } });
+    const newSocket = io(`${process.env.REACT_APP_SERVER_URL}`, {
+      query: { id },
+    });
     setSocket(newSocket);
     console.log("Socket Obj from SocketProvider : ", socket);
     return () => newSocket.close();
